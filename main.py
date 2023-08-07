@@ -11,8 +11,15 @@ parent.iconbitmap("pdf-icon.ico") # icon of the window
 parent.title("PDF Reader [Ismail Knina]") # title
 parent.configure(background="White")
 def on_closing():
-    if messagebox.askyesno(title="Quit?",message="Do you really wants to Quit ? You will lose all the Processe!"):
-        parent.destroy()
+    if messagebox.askyesno(title="Quit?",message="Do you really wants to Quit ? You will lose all the Processe!"): # Asking user To Quit
+        try:
+            for i in range(len(list_of_images_from_pdf)):
+                os.remove(f'new_folder_images\page'+ str(i) +'.png')
+                os.remove(f'resizable_images\p{i}.png')
+        except:
+            pass
+        finally:
+            parent.destroy() # Closing Programme
 parent.protocol("WM_DELETE_WINDOW",on_closing)
 
 def browse():
